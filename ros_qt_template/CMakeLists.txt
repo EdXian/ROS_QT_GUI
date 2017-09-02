@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 2.8.6) #version 3.1.0 is recommended for qt5
 project(ros_qt_template)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+ add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -10,7 +10,22 @@ project(ros_qt_template)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
 )
+find_package(Qt5Widgets REQUIRED)
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+
+
+set(qt_srcs
+      GUI/mainwindow.cpp)
+set(qt_hdrs
+      GUI/mainwindow.h)
+ QT5_WRAP_CPP(qt_moc_srcs ${qt_hdrs})
+  QT5_WRAP_UI(uis_h GUI/mainwindow.ui)
+  include_directories(${CMAKE_CURRENT_BINARY_DIR})
+  include_directories(${Qt5Widgets_INCLUDES})
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -101,11 +116,14 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES ros_qt_template
-#  CATKIN_DEPENDS roscpp
+  INCLUDE_DIRS include
+  LIBRARIES ros_qt_template
+  CATKIN_DEPENDS roscpp
 #  DEPENDS system_lib
 )
+
+
+
 
 ###########
 ## Build ##
@@ -114,25 +132,31 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/ros_qt_template.cpp
+# add_library( ros_qt_lib
+#
 # )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+#add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/ros_qt_template_node.cpp)
+add_library(mainwindow GUI/mainwindow.cpp)
+target_link_libraries (mainwindow Qt5::Widgets)
 
+add_executable(main src/main.cpp)
+target_link_libraries(main
+                   mainwindow
+                   ${catkin_LIBRARIES}
+                   ${Qt5Widgets_LIBRARIES}    )
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -141,11 +165,13 @@ include_directories(
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+#add_dependencies(qt_pub ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
+#target_link_libraries(qt_pub
+#     ros_qt_lib
 #   ${catkin_LIBRARIES}
+#   ${PROJECT_NAME}
 # )
 
 #############
