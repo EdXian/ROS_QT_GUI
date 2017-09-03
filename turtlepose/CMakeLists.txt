@@ -14,9 +14,11 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(  qt_srcs
       GUI/mainwindow.cpp
+      GUI/mytimer.cpp
    )
 set(  qt_hdrs
       GUI/mainwindow.h
+      GUI/mytimer.h
    )
 
 #QT5_WRAP_CPP(qt_moc_srcs ${qt_hdrs})
