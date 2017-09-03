@@ -8,5 +8,11 @@
  4. Qt : 5.7.1 Qt creator : 4.2.1
  5. ROS : kinetic
 ## 軟體安裝
-1. [ROS安裝](http://wiki.ros.org/kinetic/Installation/Ubuntu)
-2. [QT5安裝](https://wiki.qt.io/Install_Qt_5_on_Ubuntu)
+ 1. [ROS安裝](http://wiki.ros.org/kinetic/Installation/Ubuntu)
+ 2. [QT5安裝](https://wiki.qt.io/Install_Qt_5_on_Ubuntu)
+## 編譯
+```
+cd ~/catkin_ws/src
+git clone https://github.com/EdXian/ROS_QT_GUI.git
+cd ~/catkin_ws && catkin_make
+```
