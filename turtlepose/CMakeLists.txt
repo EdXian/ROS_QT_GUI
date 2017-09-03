@@ -28,7 +28,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${Qt5Widgets_INCLUDES})
 
 catkin_package(
-  INCLUDE_DIRS include
+  #INCLUDE_DIRS include
   LIBRARIES ros_qt_template
   CATKIN_DEPENDS roscpp
 #  DEPENDS system_lib
