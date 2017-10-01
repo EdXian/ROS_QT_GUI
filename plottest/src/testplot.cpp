@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 {
   ros::init(argc, argv, "ros_qt_template");
   QApplication app(argc, argv);
- // MainWindow window;
+ MainWindow window;
 
 
 
@@ -33,6 +33,6 @@ int main(int argc, char **argv)
      // Show the view
      view->show();
 
-  //window.show();
+  window.show();
  return app.exec();
 }
