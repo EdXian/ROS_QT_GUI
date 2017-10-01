@@ -14,12 +14,12 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QCustomPlot" name="widget" native="true">
+   <widget class="QCustomPlot" name="customplot" native="true">
     <property name="geometry">
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>481</width>
+      <width>511</width>
       <height>301</height>
      </rect>
     </property>
@@ -50,7 +50,7 @@
   <customwidget>
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
-   <header>qcustomplot.h</header>
+   <header>GUI/qcustomplot.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

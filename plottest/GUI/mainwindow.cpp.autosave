@@ -25,20 +25,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->customplot->yAxis->setRange(0, 1);
     ui->customplot->replot();
 
-
-
-    /*
-    customPlot->addGraph();
-    customPlot->graph(0)->setData(x, y);
-    // give the axes some labels:
-    customPlot->xAxis->setLabel("x");
-    customPlot->yAxis->setLabel("y");
-    // set axes ranges, so we see all data:
-    customPlot->xAxis->setRange(-1, 1);
-    customPlot->yAxis->setRange(0, 1);
-    customPlot->replot();
-    */
-
   this->setWindowTitle("plottest");
 
 }
