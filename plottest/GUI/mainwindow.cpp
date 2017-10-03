@@ -2,42 +2,43 @@
 #include "ui_mainwindow.h"
 #include"stdio.h"
 #include "qgraphicsview.h"
+#include "math.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
      ui->setupUi(this);
     // generate some data:
-    QVector<double> x(101), y(101); // initialize with entries 0..100
-    for (int i=0; i<101; ++i)
+  /*
+    QVector<double> x(201), y(201); // initialize with entries 0..100
+    for (int i=0; i<201; ++i)
     {
-      x[i] = i/50.0 - 1; // x goes from -1 to 1
-      y[i] = x[i]*x[i]; // let's plot a quadratic function
+      x[i] = i/25.0 - 3; // x goes from -1 to 1
+      y[i] = sin(x[i]*x[i]); // let's plot a quadratic function
     }
-    ui->customplot->xAxis->setRange(-1, 1);
+  */
+
+
+    QVector<double> x(4) , y(4);
+
+    x[0] = 0; y[0]= 0.8;
+    x[1] = 0; y[1]= -0.8;
+    x[2] = 1; y[2]= 0.0;
+    x[3] = 0; y[3]= 0.8;
+
 
     ui->customplot->addGraph();
+
+    ui->customplot->graph(0)->setLineStyle(QCPGraph::LineStyle::lsNone);
+     ui->customplot->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->customplot->graph(0)->setData(x, y);
     ui->customplot->xAxis->setLabel("x");
     ui->customplot->yAxis->setLabel("y");
     // set axes ranges, so we see all data:
-    ui->customplot->xAxis->setRange(-1, 1);
-    ui->customplot->yAxis->setRange(0, 1);
+    ui->customplot->xAxis->setRange(-3, 3);
+    ui->customplot->yAxis->setRange(-3, 3);
     ui->customplot->replot();
-
-
-
-    /*
-    customPlot->addGraph();
-    customPlot->graph(0)->setData(x, y);
-    // give the axes some labels:
-    customPlot->xAxis->setLabel("x");
-    customPlot->yAxis->setLabel("y");
-    // set axes ranges, so we see all data:
-    customPlot->xAxis->setRange(-1, 1);
-    customPlot->yAxis->setRange(0, 1);
-    customPlot->replot();
-    */
 
   this->setWindowTitle("plottest");
 
