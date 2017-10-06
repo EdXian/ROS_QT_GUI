@@ -27,14 +27,19 @@ private slots:
     void sub_loop();
 
 private:
-    //ros::Rate loop_rate;
+
+
+    QTimer *timer;
+    //QVector<double> x,y;
+    std::vector<QVector<double>> x,y;
+    Ui::MainWindow *ui;
+    int count=0;
+    std::vector<std::string> rigidbody_list;
+    std::vector<rigidbody*> rigidbody_group;
     ros::NodeHandle nh;
     ros::Subscriber sub;
-    QTimer *timer;
-    Ui::MainWindow *ui;
-    rigidbody r1;
-
-    QVector<double> x,y;
+    ros::master::V_TopicInfo topic_list;
+    bool getRosTopics(ros::master::V_TopicInfo& topics);
 };
 
 #endif // MAINWINDOW_H
