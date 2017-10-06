@@ -19,10 +19,12 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(  qt_srcs
       GUI/mainwindow.cpp
         GUI/qcustomplot.cpp
+        include/rigidbody.cpp
    )
 set(  qt_hdrs
       GUI/mainwindow.h
          GUI/qcustomplot.h
+         include/rigidbody.h
    )
 find_package(Qt5PrintSupport)
 #QT5_WRAP_CPP(qt_moc_srcs ${qt_hdrs})
