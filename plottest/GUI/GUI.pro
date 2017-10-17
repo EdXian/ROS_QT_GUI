@@ -4,9 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui webkit
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets  printsupport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets  printsupport webkitwidgets
 
 TARGET = GUI
 TEMPLATE = app
