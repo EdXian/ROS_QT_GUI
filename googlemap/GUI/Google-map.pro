@@ -13,10 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
-
-HEADERS  += mainwindow.h
-
+        mainwindow.cpp\
+        geocode_data_manager.cpp
+HEADERS  += mainwindow.h\
+            geocode_data_manager.cpp
 FORMS    += mainwindow.ui
 
 #DISTFILES +=

@@ -19,9 +19,11 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(  qt_srcs
       GUI/mainwindow.cpp
+      GUI/geocode_data_manager.cpp
    )
 set(  qt_hdrs
       GUI/mainwindow.h
+      GUI/geocode_data_manager.h
    )
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})

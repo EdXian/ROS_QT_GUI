@@ -4,23 +4,32 @@
 #include <QtWebEngineWidgets/QWebEngineView>
 #include <QtWebEngineWidgets/QWebEnginePage>
 #include <QtWebEngineWidgets/QWebEngineSettings>
-#include "QJsonArray"
+
+#include "geocode_data_manager.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QWebEngineView* webview = new QWebEngineView;
-    QUrl url = QUrl("https://www.google.com.tw/maps/search/Google+Maps+API+warning:+NoApiKeys/@24.787318, 120.997413,15z/data=!3m1!4b1");
+    geocode_data_manager geo;
+    //QString str;
+   QWebEngineView* webview = new QWebEngineView; //address=1600+Amphitheatre+Parkway,+Mountain+View,+CA  https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
+      QUrl url = QUrl("https://maps.googleapis.com/maps/api/geocode/json?latlng=24.785985,120.99991&key=AIzaSyADViN2MPMwHpiKa4E6KnXiNfQH-KoGwAk");
+     //QUrl url = QUrl("https://www.google.com.tw/maps/@24.785981, 120.997351,16z?hl=zh-TW");
+      // QUrl url = QUrl("https://maps.googleapis.com/maps/api/js?key=AIzaSyCSyQJ3wxBdwdN3WjYy2_A15lMINE6lBu0&libraries=drawing");
 
-   // QUrl url = QUrl("https://maps.googleapis.com/maps/api/timezone/json?location=39.6034810,-119.6822510&timestamp=1331161200&key=AIzaSyA5DKH5FfPDz6NAvqWTzuMOowQ2-Z6YXxA");
+     // QUrl url = QUrl("qrc:/map.html");
+       webview->page()->load(url);
+      // webview->page()->runJavaScript();
 
-    //QUrl url = QUrl("qrc:/map.html");
-//    url.setHost();
-//    url.setPort(10000);
-    webview->page()->load(url);
-    ui->verticalLayout->addWidget(webview);
+       ui->verticalLayout->addWidget(webview);
+//    geo.geocode_printf();
+//    geo.geocode_getCoordinates();
+//    geo.geocode_DataReady2Read();
+    //geo.geocode_getCoordinates();
+  //  geo.geocode_DataReady2Read();
+
 }
 
 MainWindow::~MainWindow()
