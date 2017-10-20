@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     QWebEngineView* webview = new QWebEngineView;
-    QUrl url = QUrl("qrc:/html/map.html");
+    QUrl url = QUrl("qrc:/map.html");
     webview->page()->load(url);
     ui->verticalLayout->addWidget(webview);
 
