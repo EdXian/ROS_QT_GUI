@@ -1,8 +1,4 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2016-12-20T10:42:08
-#
-#-------------------------------------------------
+
 
 QT       += core gui webengine webenginewidgets network
 

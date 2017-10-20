@@ -1,24 +1,24 @@
 #include "geocode_data_manager.h"
 //#include "qstring.h"
 #include <QJsonParseError>
+#include <QEventLoop>
 geocode_data_manager::geocode_data_manager(QObject *parent) :
     QObject(parent)
 {
-      m_pNetworkAccessManager = new QNetworkAccessManager(this);
-     // connect(m_pNetworkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+      QString baseUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=交通大學,+TW&key=AIzaSyADViN2MPMwHpiKa4E6KnXiNfQH-KoGwAk";
+      QNetworkRequest request;
+      request.setUrl(QUrl(baseUrl));
+      QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+      QNetworkReply *pReplay = manager->get(request);
+      QEventLoop eventLoop;
+      QObject::connect(manager, &QNetworkAccessManager::finished, &eventLoop, &QEventLoop::quit);
+      eventLoop.exec();
+      QByteArray bytes = pReplay->readAll();
+      QString s = QString::fromUtf8(bytes);
+
+      qDebug() << s;
 }
 
-void geocode_data_manager::geocode_getCoordinates(void)
-{
-    //https://hacker-news.firebaseio.com/v0/newstories.json
-  const  QString url = QString("https://maps.googleapis.com/maps/api/geocode/json?latlng=24.785985,120.99991&key=AIzaSyADViN2MPMwHpiKa4E6KnXiNfQH-KoGwAk");
-    //QString url = QString("https://hacker-news.firebaseio.com/v0/newstories.json");
-    mNetReply = m_pNetworkAccessManager->get(QNetworkRequest(QUrl(url)));
-
-   //connect(mNetReply, &QIODevice::readyRead, this, &geocode_data_manager::OnDataReadyToRead);
-   //connect(mNetReply, &QNetworkReply::finished, this, &geocode_data_manager::OnListReadFinished);
-
-}
 //
 
 void geocode_data_manager::OnDataReadyToRead()
