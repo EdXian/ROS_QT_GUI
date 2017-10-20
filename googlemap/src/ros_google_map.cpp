@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 
     QApplication app(argc, argv);
     MainWindow window;
-    geocode_data_manager geo;
+   // geocode_data_manager geo;
     window.show();
    return app.exec();
 
