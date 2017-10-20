@@ -13,22 +13,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //geocode_data_manager geo;
-    //QString str;
-      QWebEngineView* webview = new QWebEngineView;
-      QUrl url = QUrl("qrc:/html/map.html");
 
-      //url.setUrl(QUrl::fromLocalFile("map.html"));
-
-      // QUrl::fromLocalFile("map.html");
-      //webview->setUrl(QUrl::fromLocalFile("map.html"));
-      QString s=QFileInfo("googlemap/map.html").absoluteFilePath();
-
-     qDebug()<< s;
-      // webview->page()->load(url);
-     webview->setUrl(s);
-      // webview->page()->runJavaScript();
-       ui->verticalLayout->addWidget(webview);
+    QWebEngineView* webview = new QWebEngineView;
+    QUrl url = QUrl("qrc:/html/map.html");
+    webview->page()->load(url);
+    ui->verticalLayout->addWidget(webview);
 
 }
 
