@@ -14,9 +14,24 @@ geocode_data_manager::geocode_data_manager(QObject *parent) :
       QObject::connect(manager, &QNetworkAccessManager::finished, &eventLoop, &QEventLoop::quit);
       eventLoop.exec();
       QByteArray bytes = pReplay->readAll();
-      QString s = QString::fromUtf8(bytes);
 
-      qDebug() << s;
+        QString json = QString::fromUtf8(bytes);
+        QJsonDocument d=QJsonDocument::fromJson(json.toUtf8());
+        QJsonObject json_obj=d.object();
+        QString strJson=d.toJson();
+        qDebug()<<strJson.toStdString().data();
+        qDebug()<<"---------------------------------";
+        QJsonArray data=json_obj["Data"].toArray();
+            for(int i=0; i<data.size(); i++){
+                if(data[i].isString()){
+                    qDebug()<<"Data"<<i<<":"<<data[i].toString().toStdString().data();
+                }else if(data[i].isDouble()){
+                    qDebug()<<"Data"<<i<<":"<<data[i].toDouble();
+                }else if(data[i].isBool()){
+                    qDebug()<<"Data"<<i<<":"<<data[i].toBool();
+                }
+            }
+      //qDebug() << json;
 }
 
 //
