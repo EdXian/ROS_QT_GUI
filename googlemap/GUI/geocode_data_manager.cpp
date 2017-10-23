@@ -20,15 +20,19 @@ geocode_data_manager::geocode_data_manager(QObject *parent) :
 
       QJsonDocument json_d=QJsonDocument::fromJson(json.toUtf8());
       QJsonObject json_obj=json_d.object();
-
-
+      //Qstring j_string=json_d.toJson().toStdString();
+      qDebug()<<json_d.toJson().toStdString().data();
       QVariantMap mainMap= json_obj.toVariantMap();
+      QVariantList results = mainMap["results"].toList();
 
 
-      QVariantList results = mainMap["inventory"].toList();
-    //  double east  = results[0].toMap()["geometry"].toMap()["location"].toMap()["lng"].toDouble();
-     // double north = results[0].toMap()["geometry"].toMap()["location"].toMap()["lat"].toDouble();
+     double east  = results[0].toMap()["geometry"].toMap()["location"].toMap()["lng"].toFloat();
+     double north = results[0].toMap()["geometry"].toMap()["location"].toMap()["lat"].toFloat();
 
+//     qDebug()<<"lng"<<results[0].toMap()["geometry"].toMap()["location"].toMap()["lng"].toFloat();
+//     qDebug()<<"lat"<<results[0].toMap()["geometry"].toMap()["location"].toMap()["lat"].toFloat();
+      printf("lng : %f\n",results[0].toMap()["geometry"].toMap()["location"].toMap()["lng"].toFloat());
+      printf("lat : %f\n",results[0].toMap()["geometry"].toMap()["location"].toMap()["lat"].toFloat());
      // qDebug<<mainMap["results"].toMap();
 
 }
