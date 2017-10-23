@@ -2,10 +2,11 @@
 //#include "qstring.h"
 #include <QJsonParseError>
 #include <QEventLoop>
+#include <QVariantMap>
 geocode_data_manager::geocode_data_manager(QObject *parent) :
     QObject(parent)
 {
-      QString baseUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=交通大學,+TW&key=AIzaSyADViN2MPMwHpiKa4E6KnXiNfQH-KoGwAk";
+      QString baseUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=nctu,+TW&key=AIzaSyADViN2MPMwHpiKa4E6KnXiNfQH-KoGwAk";
       QNetworkRequest request;
       request.setUrl(QUrl(baseUrl));
       QNetworkAccessManager *manager = new QNetworkAccessManager(this);
@@ -13,25 +14,23 @@ geocode_data_manager::geocode_data_manager(QObject *parent) :
       QEventLoop eventLoop;
       QObject::connect(manager, &QNetworkAccessManager::finished, &eventLoop, &QEventLoop::quit);
       eventLoop.exec();
-      QByteArray bytes = pReplay->readAll();
 
-        QString json = QString::fromUtf8(bytes);
-        QJsonDocument d=QJsonDocument::fromJson(json.toUtf8());
-        QJsonObject json_obj=d.object();
-        QString strJson=d.toJson();
-        qDebug()<<strJson.toStdString().data();
-        qDebug()<<"---------------------------------";
-        QJsonArray data=json_obj["Data"].toArray();
-            for(int i=0; i<data.size(); i++){
-                if(data[i].isString()){
-                    qDebug()<<"Data"<<i<<":"<<data[i].toString().toStdString().data();
-                }else if(data[i].isDouble()){
-                    qDebug()<<"Data"<<i<<":"<<data[i].toDouble();
-                }else if(data[i].isBool()){
-                    qDebug()<<"Data"<<i<<":"<<data[i].toBool();
-                }
-            }
-      //qDebug() << json;
+      QByteArray bytes = pReplay->readAll();
+       QString json = QString::fromUtf8(bytes);
+
+      QJsonDocument json_d=QJsonDocument::fromJson(json.toUtf8());
+      QJsonObject json_obj=json_d.object();
+
+
+      QVariantMap mainMap= json_obj.toVariantMap();
+
+
+      QVariantList results = mainMap["inventory"].toList();
+    //  double east  = results[0].toMap()["geometry"].toMap()["location"].toMap()["lng"].toDouble();
+     // double north = results[0].toMap()["geometry"].toMap()["location"].toMap()["lat"].toDouble();
+
+     // qDebug<<mainMap["results"].toMap();
+
 }
 
 //
