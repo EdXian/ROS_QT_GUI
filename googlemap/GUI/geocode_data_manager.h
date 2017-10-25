@@ -23,6 +23,12 @@ public:
     void geocode_DataReady2Read();
     void OnDataReadyToRead();
     void OnListReadFinished();
+
+    //
+    void get_location_gps(QString name);
+    float get_location_alttitude(float lng,float lat);
+
+
 private slots:
     //void replyFinished(QNetworkReply* reply);
 
