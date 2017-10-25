@@ -18,26 +18,22 @@ public:
     geocode_data_manager(QObject *parent=0);
 
 
-    void geocode_getCoordinates(void);
-    void geocode_printf();
-    void geocode_DataReady2Read();
-    void OnDataReadyToRead();
-    void OnListReadFinished();
-
-    //
-    void get_location_gps(QString name);
+    void get_location_corrdinate(QString object);
+    void get_location_gps(QString object);
     float get_location_alttitude(float lng,float lat);
-
+    void geocode_printf();
 
 private slots:
-    //void replyFinished(QNetworkReply* reply);
+
 
  private:
-     void NetworkCleanup();
-      QNetworkReply *mNetReply;
-      QByteArray *mDataBuffer;
-      QNetworkAccessManager* m_pNetworkAccessManager;
-      QString  geocode_json;
+      QString API_KEY="AIzaSyADViN2MPMwHpiKa4E6KnXiNfQH-KoGwAk";
+      QString ELE_API_url="https://maps.googleapis.com/maps/api/elevation/json?";
+      QString GEO_API_url="https://maps.googleapis.com/maps/api/geocode/json?";
+
+      void NetworkCleanup();
+
+
 };
 
 #endif // GEOCODE_DATA_MANAGER_H
