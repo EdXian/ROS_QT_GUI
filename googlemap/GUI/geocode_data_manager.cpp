@@ -17,7 +17,7 @@ void geocode_data_manager::get_location_gps(QString object)
 
 }
 
-void  geocode_data_manager::get_location_corrdinate(QString object)
+void  geocode_data_manager::get_location_corrdinate(QString object,double& east , double& north)
 {
    //https://maps.googleapis.com/maps/api/geocode/json?address=nctu,+TW&key=AIzaSyADViN2MPMwHpiKa4E6KnXiNfQH-KoGwAk"
    QString trans_url = QString(GEO_API_url+"address="+object+"&key="+API_KEY);
@@ -36,14 +36,13 @@ void  geocode_data_manager::get_location_corrdinate(QString object)
    QJsonDocument json_d=QJsonDocument::fromJson(json.toUtf8());
    QJsonObject json_obj=json_d.object();
    //Qstring j_string=json_d.toJson().toStdString();
-   qDebug()<<json_d.toJson().toStdString().data();
+   //qDebug()<<json_d.toJson().toStdString().data();
    QVariantMap mainMap= json_obj.toVariantMap();
    QVariantList results = mainMap["results"].toList();
-    double east  = results[0].toMap()["geometry"].toMap()["location"].toMap()["lng"].toFloat();
-    double north = results[0].toMap()["geometry"].toMap()["location"].toMap()["lat"].toFloat();
-   printf("lng : %f\n",results[0].toMap()["geometry"].toMap()["location"].toMap()["lng"].toFloat());
-   printf("lat : %f\n",results[0].toMap()["geometry"].toMap()["location"].toMap()["lat"].toFloat());
-
+     east  = results[0].toMap()["geometry"].toMap()["location"].toMap()["lng"].toFloat();
+     north = results[0].toMap()["geometry"].toMap()["location"].toMap()["lat"].toFloat();
+//   printf("lng : %f\n",results[0].toMap()["geometry"].toMap()["location"].toMap()["lng"].toFloat());
+//   printf("lat : %f\n",results[0].toMap()["geometry"].toMap()["location"].toMap()["lat"].toFloat());
 
    pReplay->deleteLater();
    pReplay = nullptr;
@@ -68,7 +67,7 @@ float geocode_data_manager::get_location_alttitude(float lng,float lat)
 
   QJsonDocument json_d=QJsonDocument::fromJson(json.toUtf8());
   QJsonObject json_obj=json_d.object();
-  qDebug()<<json_d.toJson().toStdString().data();
+  //qDebug()<<json_d.toJson().toStdString().data();
   QVariantMap mainMap= json_obj.toVariantMap();
   QVariantList results = mainMap["results"].toList();
   altitude = results[0].toMap()["elevation"].toFloat();

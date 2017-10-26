@@ -18,7 +18,7 @@ public:
     geocode_data_manager(QObject *parent=0);
 
 
-    void get_location_corrdinate(QString object);
+    void get_location_corrdinate(QString object,double& east , double& north);
     void get_location_gps(QString object);
     float get_location_alttitude(float lng,float lat);
     void geocode_printf();
