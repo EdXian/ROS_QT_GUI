@@ -27,6 +27,7 @@ private slots:
 
 
  private:
+      QString JS_API_KEY = "AIzaSyA_iIaYqH8KQkC4rVm2IRLAqHiBawE0_Ag";
       QString API_KEY="AIzaSyADViN2MPMwHpiKa4E6KnXiNfQH-KoGwAk";
       QString ELE_API_url="https://maps.googleapis.com/maps/api/elevation/json?";
       QString GEO_API_url="https://maps.googleapis.com/maps/api/geocode/json?";

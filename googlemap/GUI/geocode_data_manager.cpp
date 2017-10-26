@@ -73,6 +73,7 @@ float geocode_data_manager::get_location_alttitude(float lng,float lat)
   QVariantList results = mainMap["results"].toList();
   altitude = results[0].toMap()["elevation"].toFloat();
 
+
   pReplay->deleteLater();
   pReplay = nullptr;
   bytes.clear();
